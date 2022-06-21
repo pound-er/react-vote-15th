@@ -1,25 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { API } from "../API/API";
+import { CenteringWrapper ,Header } from "../GlobalStyle";
+import { StyledButton } from "../styles/StyledButton";
+import useInput from "../hooks/useInput";
+import {Form,Title,Input,Text} from'../styles/StyleForm';
 
 function SignUpPage(){
 
     const navigate = useNavigate();
-
-  const [inputText, setInputText] = useState({
-    id: '',
-    email: '',
-    pw: '',
-  });
-
-  const onInputChange = useCallback((e) => {
-    setInputText({ ...inputText, [e.target.name]: e.target.value });
-  },[inputText]);
-
-
-  const reset = () => {
-    setInputText({ id: '', email: '' , pw : ''});
-  };
+    const {inputText,onInputChange} = useInput();
 
   const signUpDB = (e) => {
 
@@ -68,34 +60,44 @@ function SignUpPage(){
 
     return(
         <>
-        <div>회원가입 페이지</div>
-        <form onSubmit={signUpDB}>
-        <input
+        <CenteringWrapper>
+        <Title>회원가입 페이지</Title>
+        <Form onSubmit={signUpDB}>
+        <Text>아이디</Text>
+        <Input
         type="id"
         name="id"
         value={inputText.id}
         onChange={onInputChange}
         spellCheck="false"
         />
-        <input
+        <Text>이메일</Text>
+        <Input
         type="email"
         name="email"
         value={inputText.email}
         onChange={onInputChange}
         spellCheck="false"
         />
-        <input
+        <Text>비밀번호</Text>
+        <Input
         type="pw"
         name="pw"
         value={inputText.pw}
         onChange={onInputChange}
         spellCheck="false"
         />
-        <button >회원가입</button>
-        </form>
+        <StyledButton>회원가입</StyledButton>
+        <div>이미 회원이신가요?
+            <Link to={`/LoginPage`}>로그인</Link>
+        </div>
+        </Form>
+        </CenteringWrapper>
         </>
     )
 }
+
+
 
 export default SignUpPage;
 
