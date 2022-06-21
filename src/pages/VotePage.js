@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
 import { StyledButton } from '../styles/StyledButton';
-import { CenteringWrapper } from '../GlobalStyle';
+import { CenteringWrapper, Header } from '../GlobalStyle';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -24,18 +24,42 @@ function VotePage() {
     fetcthCandidates();
   }, []);
 
+  const handleVote = (index) => {
+    axios
+      .post(
+        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
+        { candidate: candidates[index].candidate_name }
+      )
+      .then((response) => {
+        console.log(response);
+        setCandidates((candidates) =>
+          candidates.map((item) => {
+            if (item.id === index) {
+              return { ...item, vote_ctn: item.vote_ctn + 1 };
+            }
+            return item;
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   if (!candidates) return null;
   return (
     <>
-      <Link to={`/LoginPage`}>
-        <StyledButton>로그인</StyledButton>
-      </Link>
-      <Link to={`/SignInPage`}>
-        <StyledButton>회원가입</StyledButton>
-      </Link>
+      <Header>
+        <StyledButton>
+          <Link to={`/LoginPage`}>로그인</Link>
+        </StyledButton>
+        <StyledButton>
+          <Link to={`/SignUpPage`}>회원가입</Link>
+        </StyledButton>
+      </Header>
       <CenteringWrapper>
         {candidates.map((user) => (
-          <StyledBox key={user.id}>
+          <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
             {user.candidate_name} ({user.description})
           </StyledBox>
         ))}
