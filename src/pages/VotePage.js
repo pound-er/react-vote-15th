@@ -10,7 +10,7 @@ function VotePage() {
       try {
         setCandidates(null);
         const response = await axios.get(
-          'https://jsonplaceholder.typicode.com/users'
+          'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/'
         );
         setCandidates(response.data);
       } catch (e) {
@@ -34,7 +34,7 @@ function VotePage() {
       <ul>
         {candidates.map((user) => (
           <li key={user.id}>
-            {user.name} ({user.name})
+            {user.candidate_name} ({user.description})
           </li>
         ))}
       </ul>
