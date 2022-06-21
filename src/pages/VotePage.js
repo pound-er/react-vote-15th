@@ -57,6 +57,9 @@ function VotePage() {
         <StyledButton>
           <Link to={`/SignUpPage`}>회원가입</Link>
         </StyledButton>
+        <StyledButton>
+          <Link to={`/VoteResultPage`}>결과화면</Link>
+        </StyledButton>
       </Header>
       <CenteringWrapper>
         {candidates.map((user) => (
