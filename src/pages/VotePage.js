@@ -3,19 +3,18 @@ import axios from 'axios';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
- 
+
   useEffect(() => {
     const fetcthCandidates = async () => {
       try {
         setCandidates(null);
         const response = await axios.get(
-          'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/'
+          'https://jsonplaceholder.typicode.com/users'
         );
         setCandidates(response.data);
       } catch (e) {
         console.log(1);
       }
-
     };
 
     fetcthCandidates();
@@ -24,9 +23,9 @@ function VotePage() {
   if (!candidates) return null;
   return (
     <ul>
-      {candidates.map(user => (
+      {candidates.map((user) => (
         <li key={user.id}>
-          {user.candidate_name} ({user.description})
+          {user.name} ({user.name})
         </li>
       ))}
     </ul>
