@@ -1,29 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { API } from "../API/API";
-import styled from "styled-components";
 import { CenteringWrapper ,Header } from "../GlobalStyle";
 import { StyledButton } from "../styles/StyledButton";
+import useInput from "../hooks/useInput";
+import {Form,Title,Input,Text} from'../styles/StyleForm';
+
 function SignUpPage(){
 
     const navigate = useNavigate();
-
-    const [inputText, setInputText] = useState({
-    id: '',
-    email: '',
-    pw: '',
-  });
-
-  const onInputChange = useCallback((e) => {
-    setInputText({ ...inputText, [e.target.name]: e.target.value });
-  },[inputText]);
-
-
-  const reset = () => {
-    setInputText({ id: '', email: '' , pw : ''});
-  };
+    const {inputText,onInputChange} = useInput();
 
   const signUpDB = (e) => {
 
@@ -72,8 +60,8 @@ function SignUpPage(){
 
     return(
         <>
-        <Header>회원가입 페이지</Header>
         <CenteringWrapper>
+        <Title>회원가입 페이지</Title>
         <Form onSubmit={signUpDB}>
         <Text>아이디</Text>
         <Input
@@ -104,40 +92,11 @@ function SignUpPage(){
             <Link to={`/LoginPage`}>로그인</Link>
         </div>
         </Form>
-        
         </CenteringWrapper>
         </>
     )
 }
 
-const Form = styled.form`
-
-background-color: rgba(255, 255, 255, 0.25);
-height:100%;
-width:50%;
-padding:20px;
-border-radius: 10px;
-border: 1px solid rgba(255, 255, 255, 0.18);
-
-
-align-items: center;
-justify-content: center;
-display:flex;
-flex-direction: column;
-
-`
-const Input = styled.input`
-
-height:50px;
-width:300px;
-margin:10px;
-
-
-`
-const Text = styled.div`
-font-size:15px;
-
-`
 
 
 export default SignUpPage;

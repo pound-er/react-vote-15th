@@ -3,6 +3,9 @@ import { useRecoilState,useSetRecoilState } from 'recoil' ;
 import { UserState } from '../recoil/recoil';
 import { API } from '../API/API';
 import axios from 'axios';
+import {Form,Title,Input,Text} from'../styles/StyleForm';
+import { StyledButton } from '../styles/StyledButton';
+import { CenteringWrapper } from '../GlobalStyle';
 
 function LoginPage() {
    
@@ -56,23 +59,28 @@ function LoginPage() {
   return (
 
     <>
-    <form onSubmit={loginDB}>
-    <input
+    <CenteringWrapper>
+    <Title>로그인 페이지</Title>
+    <Form onSubmit={loginDB}>
+    <Text>아이디</Text>
+    <Input
     type="id"
     name="id"
     value={user.id}
     onChange={onInputChange}
     spellCheck="false"
-        />
-    <input
+    />
+    <Text>비밀번호</Text>
+    <Input
      type="pw"
      name="pw"
      value={user.pw}
      onChange={onInputChange}
      spellCheck="false"
      />
-  <button >로그인</button>
-  </form>
+  <StyledButton >로그인</StyledButton>
+  </Form>
+  </CenteringWrapper>
   </>
   );
 }
