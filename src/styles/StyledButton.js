@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledBox = styled.section`
+export const StyledButton = styled.section`
   padding: 15px;
   margin: 15px;
   cursor: pointer;
@@ -12,6 +12,6 @@ export const StyledBox = styled.section`
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  width: 30%;
-  height: 30%;
+  width: 10%;
+  height: 15%;
 `;

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
+import { StyledButton } from '../styles/StyledButton';
+import { CenteringWrapper } from '../GlobalStyle';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -26,17 +28,18 @@ function VotePage() {
   return (
     <>
       <Link to={`/LoginPage`}>
-        <button>로그인</button>
+        <StyledButton>로그인</StyledButton>
       </Link>
       <Link to={`/SignInPage`}>
-        <button>회원가입</button>
+        <StyledButton>회원가입</StyledButton>
       </Link>
-
-      {candidates.map((user) => (
-        <StyledBox key={user.id}>
-          {user.candidate_name} ({user.description})
-        </StyledBox>
-      ))}
+      <CenteringWrapper>
+        {candidates.map((user) => (
+          <StyledBox key={user.id}>
+            {user.candidate_name} ({user.description})
+          </StyledBox>
+        ))}
+      </CenteringWrapper>
     </>
   );
 }
