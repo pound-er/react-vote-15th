@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { StyledBox } from '../styles/StyledBox';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -31,13 +32,11 @@ function VotePage() {
         <button>회원가입</button>
       </Link>
 
-      <ul>
-        {candidates.map((user) => (
-          <li key={user.id}>
-            {user.candidate_name} ({user.description})
-          </li>
-        ))}
-      </ul>
+      {candidates.map((user) => (
+        <StyledBox key={user.id}>
+          {user.candidate_name} ({user.description})
+        </StyledBox>
+      ))}
     </>
   );
 }
