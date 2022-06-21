@@ -1,14 +1,16 @@
-import VotePage from "./pages/VotePage";
-import {Route, Routes}  from 'react-router-dom';
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
+import VotePage from './pages/VotePage';
+import { Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
   return (
     <>
-    <Routes>
-      <Route path ="/" element={<VotePage />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<VotePage />} />
+        <Route path="/LoginPage" element={<LoginPage />} />
+        <Route path="/SignUpPage" element={<SignUpPage />} />
+      </Routes>
     </>
   );
 }
