@@ -36,10 +36,15 @@ export const OverallStyle = createGlobalStyle`
     height: 100%;
   }
   body {
-    background: linear-gradient(330deg, #2ebfff63, rgba(232,166,255,0.91));
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0.35)
+    ), url('https://img.besthqwallpapers.com/Uploads/28-10-2019/109424/blue-abstract-background-creative-background-blue-watercolor-stain-background-apple-stock-wallpaper-ios-13.jpg') ;
     height: 100vh;
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: cover;
+    background-opacity: 0.5;
 }
 `;

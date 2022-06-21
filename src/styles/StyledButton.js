@@ -11,7 +11,8 @@ export const StyledButton = styled.section`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
   width: 10%;
   height: 15%;
+  font-size: 20px;
+  color: white;
 `;
