@@ -61,8 +61,6 @@ function SignUpPage(){
         window.alert("이메일이 이미 존재합니다.");
         signUpDB();
     }
-
-
 });
       
 

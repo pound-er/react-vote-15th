@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
 import { StyledButton } from '../styles/StyledButton';
-import { CenteringWrapper } from '../GlobalStyle';
+import { CenteringWrapper, Header } from '../GlobalStyle';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -25,22 +25,10 @@ function VotePage() {
   }, []);
 
   const handleVote = (index) => {
-    const formData = candidates[index].name;
-
-    const headers = {
-      'Content-type': 'multipart/form-data',
-    };
-    axios.defaults.headers.post = null;
-
     axios
       .post(
         'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
-        {
-          candidate: formData,
-        },
-        {
-          headers,
-        }
+        { candidate: candidates[index].candidate_name }
       )
       .then((response) => {
         console.log(response);
@@ -61,12 +49,14 @@ function VotePage() {
   if (!candidates) return null;
   return (
     <>
-      <Link to={`/LoginPage`}>
-        <StyledButton>로그인</StyledButton>
-      </Link>
-      <Link to={`/SignUpPage`}>
-        <StyledButton>회원가입</StyledButton>
-      </Link>
+      <Header>
+        <StyledButton>
+          <Link to={`/LoginPage`}>로그인</Link>
+        </StyledButton>
+        <StyledButton>
+          <Link to={`/SignUpPage`}>회원가입</Link>
+        </StyledButton>
+      </Header>
       <CenteringWrapper>
         {candidates.map((user) => (
           <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
