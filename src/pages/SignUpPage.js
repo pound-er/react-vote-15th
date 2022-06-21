@@ -2,11 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { API } from "../API/API";
 
 function SignUpPage(){
 
     const navigate = useNavigate();
-    
+
     const [inputText, setInputText] = useState({
     id: '',
     email: '',

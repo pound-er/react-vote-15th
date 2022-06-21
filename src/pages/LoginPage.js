@@ -21,7 +21,7 @@ function LoginPage() {
 
     axios.
     post( 
-      `${API}/login/`, 
+      'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/login/', 
       { 
           id : user.id,
           password : user.pw,          
