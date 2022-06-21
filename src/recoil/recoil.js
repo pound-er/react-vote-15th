@@ -1,5 +1,9 @@
 import { atom } from 'recoil';
 
-export const VoteState = atom({
-    
+export const UserState = atom({
+    key: 'UserState',
+    default: {
+       id : '',
+       pw: '',
+    },
 });

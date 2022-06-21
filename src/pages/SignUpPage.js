@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SignUpPage(){
 
     const navigate = useNavigate();
-
-  const [inputText, setInputText] = useState({
+    
+    const [inputText, setInputText] = useState({
     id: '',
     email: '',
     pw: '',
@@ -91,8 +92,11 @@ function SignUpPage(){
         onChange={onInputChange}
         spellCheck="false"
         />
-        <button >회원가입</button>
+        <button>회원가입</button>
         </form>
+        <div>이미 회원이신가요?
+            <Link to={`/LoginPage`}>로그인</Link>
+        </div>
         </>
     )
 }
