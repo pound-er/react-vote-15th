@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { StyledBox } from '../styles/StyledBox';
+import { StyledButton } from '../styles/StyledButton';
+import { CenteringWrapper } from '../GlobalStyle';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -10,7 +13,7 @@ function VotePage() {
       try {
         setCandidates(null);
         const response = await axios.get(
-          'https://jsonplaceholder.typicode.com/users'
+          'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/'
         );
         setCandidates(response.data);
       } catch (e) {
@@ -25,19 +28,18 @@ function VotePage() {
   return (
     <>
       <Link to={`/LoginPage`}>
-        <button>로그인</button>
+        <StyledButton>로그인</StyledButton>
       </Link>
       <Link to={`/SignInPage`}>
-        <button>회원가입</button>
+        <StyledButton>회원가입</StyledButton>
       </Link>
-
-      <ul>
+      <CenteringWrapper>
         {candidates.map((user) => (
-          <li key={user.id}>
-            {user.name} ({user.name})
-          </li>
+          <StyledBox key={user.id}>
+            {user.candidate_name} ({user.description})
+          </StyledBox>
         ))}
-      </ul>
+      </CenteringWrapper>
     </>
   );
 }
