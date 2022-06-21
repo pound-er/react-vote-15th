@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
 import { StyledButton } from '../styles/StyledButton';
-import { CenteringWrapper } from '../GlobalStyle';
+import { CenteringWrapper, Header } from '../GlobalStyle';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -49,12 +49,14 @@ function VotePage() {
   if (!candidates) return null;
   return (
     <>
-      <Link to={`/LoginPage`}>
-        <StyledButton>로그인</StyledButton>
-      </Link>
-      <Link to={`/SignInPage`}>
-        <StyledButton>회원가입</StyledButton>
-      </Link>
+      <Header>
+        <StyledButton>
+          <Link to={`/LoginPage`}>로그인</Link>
+        </StyledButton>
+        <StyledButton>
+          <Link to={`/SignUpPage`}>회원가입</Link>
+        </StyledButton>
+      </Header>
       <CenteringWrapper>
         {candidates.map((user) => (
           <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
