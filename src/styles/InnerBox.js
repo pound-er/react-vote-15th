@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledBox = styled.section`
-  padding: 10px;
-  margin: 15px;
+export const InnerBox = styled.section`
+  padding: 20px;
+  margin: 20px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -12,8 +12,8 @@ export const StyledBox = styled.section`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 10px;
-  width: 20%;
-  height: 50%;
+  width: 90%;
+  height: 80%;
   font-size: 20px;
   color: white;
 `;
