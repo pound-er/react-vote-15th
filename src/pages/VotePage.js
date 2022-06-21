@@ -64,7 +64,7 @@ function VotePage() {
       <Link to={`/LoginPage`}>
         <StyledButton>로그인</StyledButton>
       </Link>
-      <Link to={`/SignInPage`}>
+      <Link to={`/SignUpPage`}>
         <StyledButton>회원가입</StyledButton>
       </Link>
       <CenteringWrapper>
