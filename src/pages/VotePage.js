@@ -3,8 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
 import { InnerBox } from '../styles/InnerBox';
+import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
-import { CenteringWrapper, Header } from '../GlobalStyle';
+import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -44,6 +45,7 @@ function VotePage() {
       })
       .catch((error) => {
         console.log(error);
+        window.alert('로그인 후 투표해주세요');
       });
   };
 
@@ -52,19 +54,20 @@ function VotePage() {
     <>
       <Header>
         <StyledButton>
-          <Link to={`/LoginPage`}>로그인</Link>
+          <StyledLink to={`/LoginPage`}>로그인</StyledLink>
         </StyledButton>
         <StyledButton>
-          <Link to={`/SignUpPage`}>회원가입</Link>
+          <StyledLink to={`/SignUpPage`}>회원가입</StyledLink>
         </StyledButton>
         <StyledButton>
-          <Link to={`/VoteResultPage`}>결과화면</Link>
+          <StyledLink to={`/VoteResultPage`}>결과화면</StyledLink>
         </StyledButton>
       </Header>
       <CenteringWrapper>
         {candidates.map((user) => (
           <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
-            {user.candidate_name}
+            <TitleBox>{user.part}</TitleBox>
+            <CenteringWrapper>{user.candidate_name}</CenteringWrapper>
             <InnerBox>{user.description}</InnerBox>
           </StyledBox>
         ))}
