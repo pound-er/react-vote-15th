@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import './App.css';
 
 export const Container = styled.div`
   overflow: hidden;
@@ -29,7 +30,7 @@ export const CenteringWrapper = styled.div`
 export const OverallStyle = createGlobalStyle`
   *{  
     box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Pretendard';
   }
   html {
     font-size : 16px;
