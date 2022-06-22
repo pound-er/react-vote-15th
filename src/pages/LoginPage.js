@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { UserState } from '../recoil/recoil';
 import { API } from '../API/API';
 import axios from 'axios';
-import { Form, Title, Input, Text } from '../styles/StyleForm';
+import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper } from '../GlobalStyle';
 
@@ -18,12 +18,13 @@ function LoginPage() {
   );
   const loginDB = (e) => {
     e.preventDefault();
+
     axios.defaults.headers.post = null;
     axios
       .post(
         'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/login/',
         {
-          id: user.id,
+          username: user.id,
           password: user.pw,
         },
         {
@@ -35,13 +36,15 @@ function LoginPage() {
       .then((response) => {
         console.log(response.data);
         setUser({
-          id: response.data.id,
-          password: response.data.password,
+          id: response.data.username,
+          pw: response.data.password,
         });
+
         const accesstoken = response.data.token;
         localStorage.setItem('token', accesstoken);
       })
       .catch((error) => {
+        console.log(error);
         window.alert('에러에러');
       });
   };
