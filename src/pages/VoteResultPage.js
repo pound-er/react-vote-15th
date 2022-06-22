@@ -3,11 +3,16 @@ import axios from 'axios';
 import { CenteringWrapper } from '../GlobalStyle';
 import { StyledBox } from '../styles/StyledBox';
 import styled from 'styled-components';
+import { Button } from '../styles/StyleForm';
 
 function VoteResultPage() {
   const [result, setResult] = useState(null);
   const [leader, setLeader] = useState('');
+  const [scroll, setScroll] = useState(false);
 
+  //https://inpa.tistory.com/entry/AOS-%F0%9F%93%9A-%EC%8A%A4%ED%81%AC%EB%A1%A4-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-Animate-On-Scroll
+  //aos 라이브러리 사용법
+  
   useEffect(() => {
     const fetcthResult = async () => {
       try {
@@ -25,15 +30,20 @@ function VoteResultPage() {
     fetcthResult();
   }, []);
 
+  function scrollAnimation(){
+    setScroll(!scroll);
+  }
+
   if (!result) return null;
   return (
     <>
       <CenteringWrapper>
-        <Title>16기 백엔드짱 : 🎊{leader}🎊</Title>
+        <Title data-aos="zoom-in-up" data-aos-delay="500">16기 백엔드짱 : 🎊{leader}🎊</Title>
+        <Button onClick={scrollAnimation}>전체결과보기</Button>
         {result.map((user) => (
-          <StyledBox key={user.id}>
+          <>{scroll && (<StyledBox key={user.id} data-aos="fade-down">
             {user.candidate_name} ({user.vote_cnt})
-          </StyledBox>
+          </StyledBox>) }</>
         ))}
       </CenteringWrapper>
     </>

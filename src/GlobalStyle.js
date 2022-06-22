@@ -26,12 +26,21 @@ export const CenteringWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size:25px;
+`;
+
+export const Intro = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:25px;
 `;
 
 export const OverallStyle = createGlobalStyle`
   *{  
     box-sizing: border-box;
     font-family: 'Pretendard';
+    font-size:20px;
   }
   html {
     font-size : 16px;

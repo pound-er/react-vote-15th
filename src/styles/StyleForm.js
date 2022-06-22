@@ -27,3 +27,20 @@ export const Title = styled.div`
   font-size: 30px;
   color: white;
 `;
+
+export const Button = styled.button`
+
+width:20%;
+height:3rem;
+font-size:15px;
+border-radius: 10px;
+border: 1px solid rgba(255, 255, 255, 0.18);
+margin:10px;
+cursor:pointer;
+:hover{
+  transform: scale(1.1);
+}
+`
+export const LoginMessage = styled.div`
+font-size:16px;
+`
