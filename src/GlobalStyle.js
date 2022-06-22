@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   overflow: hidden;
@@ -63,4 +64,10 @@ export const OverallStyle = createGlobalStyle`
 body::-webkit-scrollbar-track {
   background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
+`;
+
+export const StyledLink = styled(Link)`
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
 `;
