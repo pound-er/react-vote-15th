@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
-import { InnerBox } from '../styles/InnerBox';
+import { InnerBox , Name} from '../styles/InnerBox';
 import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
-import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
+import { CenteringWrapper, Header, StyledLink ,Intro } from '../GlobalStyle';
+import { Title } from '../styles/StyleForm';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -64,11 +65,14 @@ function VotePage() {
         </StyledButton>
       </Header>
       <CenteringWrapper>
+        <Title>백엔드짱 투표하기 ✅</Title>
         {candidates.map((user) => (
           <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
             <TitleBox>{user.part}</TitleBox>
-            <CenteringWrapper>{user.candidate_name}</CenteringWrapper>
+            <Intro>
+              <Name>{user.candidate_name}</Name>
             <InnerBox>{user.description}</InnerBox>
+            </Intro>
           </StyledBox>
         ))}
       </CenteringWrapper>

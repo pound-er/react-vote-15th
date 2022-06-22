@@ -18,3 +18,12 @@ export const InnerBox = styled.section`
   color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `;
+
+export const Name = styled.section`
+width:50%;
+font-size:25px;
+:hover{
+  transform: scale(1.1);
+}
+margin-left:0.5rem;
+`

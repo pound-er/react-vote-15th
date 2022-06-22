@@ -2,9 +2,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { CenteringWrapper } from '../GlobalStyle';
-import { StyledButton } from '../styles/StyledButton';
 import useInput from '../hooks/useInput';
-import { Form, Title, Input, Text } from '../styles/StyleForm';
+import { Form, Title, Input, Text, Button, LoginMessage } from '../styles/StyleForm';
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -79,7 +78,7 @@ function SignUpPage() {
             onChange={onInputChange}
             spellCheck="false"
           />
-          <StyledButton>회원가입</StyledButton>
+          <Button>회원가입</Button>
           <div>
             이미 회원이신가요?
             <Link to={`/LoginPage`}>로그인</Link>

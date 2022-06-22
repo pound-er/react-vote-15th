@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { UserState } from '../recoil/recoil';
 import { API } from '../API/API';
 import axios from 'axios';
-import { Form, Title, Input, Text } from '../styles/StyleForm';
+import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper } from '../GlobalStyle';
 
@@ -72,7 +72,7 @@ function LoginPage() {
             onChange={onInputChange}
             spellCheck="false"
           />
-          <StyledButton>로그인</StyledButton>
+          <Button>로그인</Button>
         </Form>
       </CenteringWrapper>
     </>
