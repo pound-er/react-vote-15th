@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
 import { InnerBox } from '../styles/InnerBox';
+import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header } from '../GlobalStyle';
 
@@ -64,7 +65,8 @@ function VotePage() {
       <CenteringWrapper>
         {candidates.map((user) => (
           <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
-            {user.candidate_name}
+            <TitleBox>{user.part}</TitleBox>
+            <CenteringWrapper>{user.candidate_name}</CenteringWrapper>
             <InnerBox>{user.description}</InnerBox>
           </StyledBox>
         ))}
