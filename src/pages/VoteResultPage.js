@@ -1,15 +1,14 @@
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CenteringWrapper } from '../GlobalStyle';
 import { StyledBox } from '../styles/StyledBox';
 import styled from 'styled-components';
 
-function VoteResultPage(){
+function VoteResultPage() {
+  const [result, setResult] = useState(null);
+  const [leader, setLeader] = useState('');
 
-    const [result, setResult] = useState(null);
-    const [leader, setLeader] = useState('');
-
-    useEffect(() => {
+  useEffect(() => {
     const fetcthResult = async () => {
       try {
         setResult(null);
@@ -27,23 +26,23 @@ function VoteResultPage(){
   }, []);
 
   if (!result) return null;
-    return(
-        <>
-        <CenteringWrapper>
-            <Title>16기 백엔드짱 : 🎊{leader}🎊</Title>
+  return (
+    <>
+      <CenteringWrapper>
+        <Title>16기 백엔드짱 : 🎊{leader}🎊</Title>
         {result.map((user) => (
           <StyledBox key={user.id}>
             {user.candidate_name} ({user.vote_cnt})
           </StyledBox>
         ))}
       </CenteringWrapper>
-        </>
-    );
+    </>
+  );
 }
 
-const Title =styled.div`
-
-margin:10px;
-font-size:30px;
-`
+const Title = styled.div`
+  margin: 10px;
+  font-size: 30px;
+  color: white;
+`;
 export default VoteResultPage;
