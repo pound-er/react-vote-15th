@@ -44,10 +44,13 @@ function LoginPage() {
           password: response.data.password,
         });
 
-        const accesstoken = response.data.token;
+        const accesstoken = response.data.token.access;
         localStorage.setItem('token', accesstoken);
+        axios.defaults.headers.common['Authorization'] = accesstoken;
+
       })
       .catch((error) => {
+        console.log(error);
         window.alert('에러에러');
       });
   };
