@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
-import { InnerBox , Name} from '../styles/InnerBox';
+import { InnerBox } from '../styles/InnerBox';
 import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
-import { CenteringWrapper, Header, StyledLink ,Intro } from '../GlobalStyle';
-import { Title } from '../styles/StyleForm';
+import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
-
   useEffect(() => {
     const fetcthCandidates = async () => {
       try {
@@ -23,16 +21,11 @@ function VotePage() {
         console.log(1);
       }
     };
-
     fetcthCandidates();
   }, []);
-
   const handleVote = (index) => {
     axios
-      .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
-        { candidate: candidates[index].candidate_name }
-      )
+      .post({ candidate: candidates[index].candidate_name })
       .then((response) => {
         console.log(response);
         setCandidates((candidates) =>
@@ -49,7 +42,6 @@ function VotePage() {
         window.alert('로그인 후 투표해주세요');
       });
   };
-
   if (!candidates) return null;
   return (
     <>
@@ -65,19 +57,15 @@ function VotePage() {
         </StyledButton>
       </Header>
       <CenteringWrapper>
-        <Title>백엔드짱 투표하기 ✅</Title>
         {candidates.map((user) => (
           <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
             <TitleBox>{user.part}</TitleBox>
-            <Intro>
-              <Name>{user.candidate_name}</Name>
+            <CenteringWrapper>{user.candidate_name}</CenteringWrapper>
             <InnerBox>{user.description}</InnerBox>
-            </Intro>
           </StyledBox>
         ))}
       </CenteringWrapper>
     </>
   );
 }
-
 export default VotePage;

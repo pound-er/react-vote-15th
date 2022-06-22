@@ -3,26 +3,22 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { UserState } from '../recoil/recoil';
 import { API } from '../API/API';
 import axios from 'axios';
-import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
+import { Form, Title, Input, Text } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper } from '../GlobalStyle';
 
 function LoginPage() {
   const [user, setUser] = useRecoilState(UserState);
   const handleLogin = useSetRecoilState(UserState);
-
   const onInputChange = useCallback(
     (e) => {
       handleLogin({ ...user, [e.target.name]: e.target.value });
     },
     [user]
   );
-
   const loginDB = (e) => {
     e.preventDefault();
-
     axios.defaults.headers.post = null;
-
     axios
       .post(
         'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/login/',
@@ -38,19 +34,14 @@ function LoginPage() {
       )
       .then((response) => {
         console.log(response.data);
-
         setUser({
           id: response.data.id,
           password: response.data.password,
         });
-
-        const accesstoken = response.data.token.access;
+        const accesstoken = response.data.token;
         localStorage.setItem('token', accesstoken);
-        axios.defaults.headers.common['Authorization'] = accesstoken;
-
       })
       .catch((error) => {
-        console.log(error);
         window.alert('에러에러');
       });
   };
@@ -75,11 +66,10 @@ function LoginPage() {
             onChange={onInputChange}
             spellCheck="false"
           />
-          <Button>로그인</Button>
+          <StyledButton>로그인</StyledButton>
         </Form>
       </CenteringWrapper>
     </>
   );
 }
-
 export default LoginPage;

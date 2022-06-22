@@ -2,18 +2,16 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { CenteringWrapper } from '../GlobalStyle';
+import { StyledButton } from '../styles/StyledButton';
 import useInput from '../hooks/useInput';
-import { Form, Title, Input, Text, Button, LoginMessage } from '../styles/StyleForm';
+import { Form, Title, Input, Text } from '../styles/StyleForm';
 
 function SignUpPage() {
   const navigate = useNavigate();
   const { inputText, onInputChange } = useInput();
-
   const signUpDB = (e) => {
     e.preventDefault();
-
     axios.defaults.headers.post = null;
-
     axios
       .post(
         'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/signup/',
@@ -34,7 +32,6 @@ function SignUpPage() {
       })
       .catch((error) => {
         console.log(error.response);
-
         if (
           (error.response.data.username = '해당 사용자 이름은 이미 존재합니다.')
         ) {
@@ -48,7 +45,6 @@ function SignUpPage() {
         }
       });
   };
-
   return (
     <>
       <CenteringWrapper>
@@ -78,7 +74,7 @@ function SignUpPage() {
             onChange={onInputChange}
             spellCheck="false"
           />
-          <Button>회원가입</Button>
+          <StyledButton>회원가입</StyledButton>
           <div>
             이미 회원이신가요?
             <Link to={`/LoginPage`}>로그인</Link>
@@ -88,5 +84,4 @@ function SignUpPage() {
     </>
   );
 }
-
 export default SignUpPage;
