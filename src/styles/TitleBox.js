@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TitleBox = styled.section`
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
   cursor: pointer;
   display: flex;
@@ -13,7 +13,7 @@ export const TitleBox = styled.section`
   -webkit-backdrop-filter: blur(20px);
   border-radius: 10px;
   color: white;
-  width: 30%;
+  width: 25%;
   height: 80%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `;
