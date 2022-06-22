@@ -3,6 +3,7 @@ import axios from 'axios';
 import { CenteringWrapper } from '../GlobalStyle';
 import { StyledBox } from '../styles/StyledBox';
 import styled from 'styled-components';
+import { Button } from '../styles/StyleForm';
 
 function VoteResultPage() {
   const [result, setResult] = useState(null);
@@ -27,15 +28,15 @@ function VoteResultPage() {
   }, []);
 
   function scrollAnimation(){
-    setScroll(true);
+    setScroll(!scroll);
   }
 
   if (!result) return null;
   return (
     <>
       <CenteringWrapper>
-        <Title data-aos="fade-down" >16기 백엔드짱 : 🎊{leader}🎊</Title>
-        <button onClick={scrollAnimation}>전체결과보기</button>
+        <Title data-aos="zoom-in-up" data-aos-delay="500">16기 백엔드짱 : 🎊{leader}🎊</Title>
+        <Button onClick={scrollAnimation}>전체결과보기</Button>
         {result.map((user) => (
           <>{scroll && (<StyledBox key={user.id} data-aos="fade-down">
             {user.candidate_name} ({user.vote_cnt})
