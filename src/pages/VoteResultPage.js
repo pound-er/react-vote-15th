@@ -7,6 +7,7 @@ import styled from 'styled-components';
 function VoteResultPage() {
   const [result, setResult] = useState(null);
   const [leader, setLeader] = useState('');
+  const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
     const fetcthResult = async () => {
@@ -25,15 +26,20 @@ function VoteResultPage() {
     fetcthResult();
   }, []);
 
+  function scrollAnimation(){
+    setScroll(true);
+  }
+
   if (!result) return null;
   return (
     <>
       <CenteringWrapper>
-        <Title>16기 백엔드짱 : 🎊{leader}🎊</Title>
+        <Title data-aos="fade-down" >16기 백엔드짱 : 🎊{leader}🎊</Title>
+        <button onClick={scrollAnimation}>전체결과보기</button>
         {result.map((user) => (
-          <StyledBox key={user.id}>
+          <>{scroll && (<StyledBox key={user.id} data-aos="fade-down">
             {user.candidate_name} ({user.vote_cnt})
-          </StyledBox>
+          </StyledBox>) }</>
         ))}
       </CenteringWrapper>
     </>
