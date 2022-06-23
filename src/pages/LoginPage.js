@@ -48,6 +48,7 @@ function LoginPage() {
         window.alert('에러에러');
       });
   };
+
   return (
     <>
       <CenteringWrapper>
