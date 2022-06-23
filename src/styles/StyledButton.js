@@ -11,8 +11,7 @@ export const StyledButton = styled.button`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 10px;
-  width: 8%;
-  color: white;
+  width: 10%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: none;
 `;

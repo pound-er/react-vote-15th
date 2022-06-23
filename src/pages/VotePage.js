@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
-import { InnerBox } from '../styles/InnerBox';
+import { InnerBox, Welcome } from '../styles/InnerBox';
 import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
@@ -61,7 +61,7 @@ function VotePage() {
 
   return (
     <>
-    <div>{user.id}</div>
+    
       <Header>
         <StyledButton>
           <StyledLink to={`/LoginPage`}>로그인</StyledLink>
@@ -72,6 +72,7 @@ function VotePage() {
         <StyledButton>
           <StyledLink to={`/VoteResultPage`}>결과화면</StyledLink>
         </StyledButton>
+        <Welcome>{user.id ? `${user.id} 님 환영합니다!` : null} </Welcome>
       </Header>
       <CenteringWrapper>
         {candidates.map((candidate) => (

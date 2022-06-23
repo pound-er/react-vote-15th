@@ -75,9 +75,9 @@ function SignUpPage() {
             spellCheck="false"
           />
           <StyledButton>회원가입</StyledButton>
-          <div>
+          <div style={{color: 'black'}}>
             이미 회원이신가요?
-            <Link to={`/LoginPage`}>로그인</Link>
+            <Link to={`/LoginPage`} style ={{'text-decoration-line': 'none', color : 'purple'}}>로그인</Link>
           </div>
         </Form>
       </CenteringWrapper>
