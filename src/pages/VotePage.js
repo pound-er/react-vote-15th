@@ -23,10 +23,16 @@ function VotePage() {
     };
     fetcthCandidates();
   }, []);
+
   const handleVote = (index) => {
+    console.log(candidates[index].candidate_name);
     axios
-      .post({ candidate: candidates[index].candidate_name })
+      .post(
+        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
+        { candidate: candidates[index].candidate_name }
+      )
       .then((response) => {
+        console.log('1');
         console.log(response);
         setCandidates((candidates) =>
           candidates.map((item) => {
