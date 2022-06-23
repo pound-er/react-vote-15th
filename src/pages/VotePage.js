@@ -6,9 +6,12 @@ import { InnerBox } from '../styles/InnerBox';
 import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
+import { UserState } from '../recoil/recoil';
+import useRecoilValue from 'recoil';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
+
   useEffect(() => {
     const fetcthCandidates = async () => {
       try {
@@ -25,7 +28,9 @@ function VotePage() {
   }, []);
   const handleVote = (index) => {
     axios
-      .post({ candidate: candidates[index].candidate_name })
+      .post(
+        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
+        { candidate: candidates[index].candidate_name })
       .then((response) => {
         console.log(response);
         setCandidates((candidates) =>
@@ -43,6 +48,7 @@ function VotePage() {
       });
   };
   if (!candidates) return null;
+
   return (
     <>
       <Header>
@@ -57,11 +63,11 @@ function VotePage() {
         </StyledButton>
       </Header>
       <CenteringWrapper>
-        {candidates.map((user) => (
-          <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
-            <TitleBox>{user.part}</TitleBox>
-            <CenteringWrapper>{user.candidate_name}</CenteringWrapper>
-            <InnerBox>{user.description}</InnerBox>
+        {candidates.map((candidate) => (
+          <StyledBox key={candidate.id} onClick={() => handleVote(candidate.id - 1)}>
+            <TitleBox>{candidate.part}</TitleBox>
+            <CenteringWrapper>{candidate.candidate_name}</CenteringWrapper>
+            <InnerBox>{candidate.description}</InnerBox>
           </StyledBox>
         ))}
       </CenteringWrapper>

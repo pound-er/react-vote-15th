@@ -6,10 +6,14 @@ import axios from 'axios';
 import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper } from '../GlobalStyle';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [user, setUser] = useRecoilState(UserState);
   const handleLogin = useSetRecoilState(UserState);
+
+  const navigate = useNavigate();
+
   const onInputChange = useCallback(
     (e) => {
       handleLogin({ ...user, [e.target.name]: e.target.value });
@@ -35,19 +39,32 @@ function LoginPage() {
       )
       .then((response) => {
         console.log(response.data);
+        
+        const accesstoken = response.data.token;
+        localStorage.setItem('token', accesstoken);
+        //axios.defaults.headers.common['Authorization'] = accesstoken;
+
         setUser({
           id: response.data.username,
           pw: response.data.password,
         });
 
-        const accesstoken = response.data.token;
-        localStorage.setItem('token', accesstoken);
+        window.alert("로그인되었씁니다");
+
+
       })
       .catch((error) => {
         console.log(error);
-        window.alert('에러에러');
+
+        if(error.response.data.message ="Wrong password!")
+        window.alert('비밀번호가 잘못 되었습니다.');
+
+        else if(error.response.data.message ="User not found!")
+        window.alert('사용자를 찾을 수 없습니다.');
       });
   };
+
+  
   return (
     <>
       <CenteringWrapper>
