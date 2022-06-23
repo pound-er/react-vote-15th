@@ -14,4 +14,5 @@ export const StyledButton = styled.button`
   width: 8%;
   color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: none;
 `;

@@ -1,16 +1,18 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { UserState } from '../recoil/recoil';
+import { UserState, LoginState } from '../recoil/recoil';
 import { API } from '../API/API';
 import axios from 'axios';
 import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper } from '../GlobalStyle';
 import { useNavigate } from 'react-router-dom';
+import {useRecoilValue} from 'recoil';
 
 function LoginPage() {
   const [user, setUser] = useRecoilState(UserState);
   const handleLogin = useSetRecoilState(UserState);
+  const [login, setLogin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,10 +25,9 @@ function LoginPage() {
   const loginDB = (e) => {
     e.preventDefault();
 
-    axios.defaults.headers.post = null;
     axios
       .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/login/',
+        'https://pounder-vote.shop/api/login/',
         {
           username: user.id,
           password: user.pw,
@@ -40,18 +41,18 @@ function LoginPage() {
       .then((response) => {
         console.log(response.data);
         
-        const accesstoken = response.data.token;
-        localStorage.setItem('token', accesstoken);
-        //axios.defaults.headers.common['Authorization'] = accesstoken;
-
         setUser({
           id: response.data.username,
           pw: response.data.password,
         });
 
+        const accesstoken = response.data.token.access;
+        localStorage.setItem('token', accesstoken);
+        //axios.defaults.headers.common['Authorization'] = accesstoken;
+
         window.alert("로그인되었씁니다");
-
-
+        navigate('/');
+        setLogin(true);
       })
       .catch((error) => {
         console.log(error);
@@ -64,7 +65,6 @@ function LoginPage() {
       });
   };
 
-  
   return (
     <>
       <CenteringWrapper>

@@ -18,7 +18,7 @@ function VoteResultPage() {
       try {
         setResult(null);
         const response = await axios.get(
-          'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/'
+          'https://pounder-vote.shop/api/vote/'
         );
         setResult(response.data);
         setLeader(response.data[0].candidate_name);

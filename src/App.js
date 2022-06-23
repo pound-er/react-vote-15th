@@ -6,24 +6,22 @@ import { OverallStyle } from './GlobalStyle';
 import VoteResultPage from './pages/VoteResultPage';
 import axios from 'axios';
 import { useEffect } from 'react';
-import useRecoilState from 'recoil';
-import { UserState } from './recoil/recoil';
-import {useRecoilValue} from 'recoil';
+import { UserState} from './recoil/recoil';
+import {useRecoilValue ,useRecoilState} from 'recoil';
 
 function App() {
-  
-  const user = useRecoilValue(UserState);
-  const token = localStorage.getItem('token');
 
+  const user = useRecoilValue(UserState);
+
+  const token = localStorage.getItem('token');
+  console.log(token);
+  
   useEffect(() => {
     axios
       .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/verify/',
-          
+        'https://pounder-vote.shop/api/verify/',
           {
-            token: token,
-            withCredentials: true,
-            
+            token: token, 
           },
          { headers: {
             'Content-Type': 'application/json',
@@ -37,7 +35,8 @@ function App() {
         
       })
       .catch((error) => {
-        console.log(error.type, error.message);
+        console.log(error.data, error.message);
+        console.log(error);
       });
   }, [user]);
 

@@ -7,17 +7,20 @@ import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
 import { UserState } from '../recoil/recoil';
-import useRecoilValue from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
-
+  const user = useRecoilValue(UserState);
+  
+  console.log("투표페이지에서도아이디받기"+user.id);
+  
   useEffect(() => {
     const fetcthCandidates = async () => {
       try {
         setCandidates(null);
         const response = await axios.get(
-          'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/'
+          'https://pounder-vote.shop/api/vote/'
         );
         setCandidates(response.data);
       } catch (e) {
@@ -26,13 +29,18 @@ function VotePage() {
     };
     fetcthCandidates();
   }, []);
+
   const handleVote = (index) => {
+    console.log(candidates[index].candidate_name);
     axios
       .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
-        { candidate: candidates[index].candidate_name })
+        'https://pounder-vote.shop/api/vote/',
+        { candidate: candidates[index].candidate_name }
+      )
       .then((response) => {
+        console.log('투표 되었습니다!');
         console.log(response);
+        
         setCandidates((candidates) =>
           candidates.map((item) => {
             if (item.id === index) {
@@ -42,15 +50,18 @@ function VotePage() {
           })
         );
       })
+      
       .catch((error) => {
         console.log(error);
         window.alert('로그인 후 투표해주세요');
       });
   };
+  
   if (!candidates) return null;
 
   return (
     <>
+    <div>{user.id}</div>
       <Header>
         <StyledButton>
           <StyledLink to={`/LoginPage`}>로그인</StyledLink>
