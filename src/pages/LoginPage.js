@@ -6,8 +6,10 @@ import axios from 'axios';
 import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper } from '../GlobalStyle';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserState);
   const handleLogin = useSetRecoilState(UserState);
   const onInputChange = useCallback(
@@ -42,6 +44,7 @@ function LoginPage() {
 
         const accesstoken = response.data.token;
         localStorage.setItem('token', accesstoken);
+        navigate(`/`);
       })
       .catch((error) => {
         console.log(error);
