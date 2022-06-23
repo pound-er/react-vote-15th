@@ -14,7 +14,7 @@ function VotePage() {
   const user = useRecoilValue(UserState);
   
   console.log("투표페이지에서도아이디받기"+user.id);
-  
+
   useEffect(() => {
     const fetcthCandidates = async () => {
       try {
@@ -61,7 +61,6 @@ function VotePage() {
 
   return (
     <>
-    
       <Header>
         <StyledButton>
           <StyledLink to={`/LoginPage`}>로그인</StyledLink>
