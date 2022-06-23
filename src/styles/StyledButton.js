@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledButton = styled.section`
+export const StyledButton = styled.button`
   padding: 10px;
   margin: 10px;
   cursor: pointer;
