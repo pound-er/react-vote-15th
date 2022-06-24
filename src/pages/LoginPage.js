@@ -24,7 +24,7 @@ function LoginPage() {
     axios.defaults.headers.post = null;
     axios
       .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/login/',
+        'https://pounder-vote.shop/api/login/',
         {
           username: user.id,
           password: user.pw,
@@ -42,7 +42,7 @@ function LoginPage() {
           pw: response.data.password,
         });
 
-        const accesstoken = response.data.token;
+        const accesstoken = response.data.token.access;
         localStorage.setItem('token', accesstoken);
         navigate(`/`);
       })

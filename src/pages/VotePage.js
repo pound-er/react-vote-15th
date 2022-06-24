@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
-import { InnerBox } from '../styles/InnerBox';
+import { InnerBox, Welcome } from '../styles/InnerBox';
 import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
+import { UserState } from '../recoil/recoil';
+import { useRecoilValue } from 'recoil';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
+  const user = useRecoilValue(UserState);
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     const fetcthCandidates = async () => {
       try {
         setCandidates(null);
         const response = await axios.get(
-          'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/'
+          'https://pounder-vote.shop/api/candidate/'
         );
         setCandidates(response.data);
       } catch (e) {
@@ -27,10 +32,9 @@ function VotePage() {
   const handleVote = (index) => {
     console.log(candidates[index].candidate_name);
     axios
-      .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
-        { candidate: candidates[index].candidate_name }
-      )
+      .post('https://pounder-vote.shop/api/vote/', {
+        candidate: candidates[index].candidate_name,
+      })
       .then((response) => {
         console.log('1');
         console.log(response);
