@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { UserState} from './recoil/recoil';
 import {useRecoilValue ,useRecoilState} from 'recoil';
+import Api from './components/customAPI';
 
 function App() {
 
@@ -23,18 +24,20 @@ function App() {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${localStorage.getItem('token')}`,
-            
           },
         }
         
       )
       .then((response) => {
         console.log(response.data);
+        localStorage.setItem('username', response.data.username);
+        console.log(token);
         
       })
       .catch((error) => {
         console.log(error.data, error.message);
         console.log(error);
+        localStorage.setItem('username', " ");
       });
   }, [user]);
 

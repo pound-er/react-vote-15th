@@ -13,7 +13,8 @@ function VotePage() {
   const [candidates, setCandidates] = useState(null);
   const user = useRecoilValue(UserState);
   const token = localStorage.getItem('token');
-  
+  const username = localStorage.getItem('username');
+
   console.log("투표페이지에서도아이디받기"+user.id);
 
   useEffect(() => {
@@ -61,15 +62,87 @@ function VotePage() {
       
       .catch((error) => {
         console.log(error);
-        window.alert('로그인 후 투표해주세요');
+        if(error.response.data.message == '투표는 로그인이 필요합니다!')
+         {window.alert('로그인 후 투표해주세요')}
+         else if(error.response.data.message == '모든 파트의 투표를 완료하셨기에 재투표가 불가능합니다!')
+        {window.alert('모든 파트의 투표를 완료하셨습니다!')}
+        else if(error.response.data.message == '프론트엔드 파트의 투표를 완료하셨기에 재투표가 불가능합니다!')
+        {window.alert('프론트엔드 파트의 투표를 완료하셨습니다!')}
+        else if(error.response.data.message == '백엔드 파트의 투표를 완료하셨기에 재투표가 불가능합니다!')
+        {window.alert('백엔드 파트의 투표를 완료하셨습니다!')}
       });
   };
-  
+ 
+  /*function refreshToken(){
+    const refreshtoken = localStorage.getItem('refreshtoken');
+    axios
+      .post(
+        'https://pounder-vote.shop/api/token/refresh/',
+        {
+          refresh : refreshtoken,
+        },
+        {
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+
+        const accesstoken = response.data.access;
+        localStorage.setItem('token', accesstoken);
+        const tokening = localStorage.getItem('token');
+        console.log(tokening)
+
+      })
+      .catch((error) => {
+        console.log(error);
+        window.alert('토큰갱신에러');
+      });
+    }*/
+    
+
+  const logoutDB = (e) => { 
+    e.preventDefault();
+    //refreshToken();
+
+    const refreshtoken = localStorage.getItem('refreshtoken');
+    console.log(token);
+    axios
+      .post(
+        'https://pounder-vote.shop/api/logout/',
+        {
+          refresh : refreshtoken,
+        },
+        {
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        window.alert("로그아웃완");
+
+      })
+      .catch((error) => {
+        console.log(error);
+
+        if(error.response.data.message ="로그아웃이 불가한 상태입니다.")
+        window.alert('로그인을 먼저 해주세요.');
+      });
+  };
+
+
   if (!candidates) return null;
 
   return (
     <>
       <Header>
+       <StyledButton onClick={logoutDB}>
+          로그아웃
+        </StyledButton>
         <StyledButton>
           <StyledLink to={`/LoginPage`}>로그인</StyledLink>
         </StyledButton>
@@ -79,7 +152,7 @@ function VotePage() {
         <StyledButton>
           <StyledLink to={`/VoteResultPage`}>결과화면</StyledLink>
         </StyledButton>
-        <Welcome>{user.id ? `${user.id} 님 환영합니다!` : null} </Welcome>
+        <Welcome>{username ? `${username} 님 환영합니다!` : null} </Welcome>
       </Header>
       <CenteringWrapper>
         {candidates.map((candidate) => (
@@ -92,5 +165,5 @@ function VotePage() {
       </CenteringWrapper>
     </>
   );
-}
+        }
 export default VotePage;
