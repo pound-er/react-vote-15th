@@ -73,7 +73,7 @@ function VotePage() {
       });
   };
  
-  function refreshToken(){
+  /*function refreshToken(){
     const refreshtoken = localStorage.getItem('refreshtoken');
     axios
       .post(
@@ -93,26 +93,27 @@ function VotePage() {
         const accesstoken = response.data.access;
         localStorage.setItem('token', accesstoken);
         const tokening = localStorage.getItem('token');
-        console.log(tokening);
+        console.log(tokening)
 
       })
       .catch((error) => {
         console.log(error);
         window.alert('토큰갱신에러');
       });
-    }
-
-  const logoutDB = (e) => {
-    e.preventDefault();
-    refreshToken();
+    }*/
     
-    const token = localStorage.getItem('token');
+
+  const logoutDB = (e) => { 
+    e.preventDefault();
+    //refreshToken();
+
+    const refreshtoken = localStorage.getItem('refreshtoken');
     console.log(token);
     axios
       .post(
         'https://pounder-vote.shop/api/logout/',
         {
-          refresh : token,
+          refresh : refreshtoken,
         },
         {
           headers: {
