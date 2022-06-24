@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { UserState, LoginState } from '../recoil/recoil';
-import { API } from '../API/API';
 import axios from 'axios';
 import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';

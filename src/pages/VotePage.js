@@ -14,7 +14,6 @@ function VotePage() {
   const user = useRecoilValue(UserState);
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username');
-
   //console.log("투표페이지에서도아이디받기"+user.id);
 
   useEffect(() => {
@@ -42,7 +41,6 @@ function VotePage() {
           headers:{
             Authorization: `${localStorage.getItem('token')}`,
             'Content-Type': 'application/json',
-
           }
         }
       )
@@ -72,36 +70,6 @@ function VotePage() {
         {window.alert('백엔드 파트의 투표를 완료하셨습니다!')}
       });
   };
- 
-  /*function refreshToken(){
-    const refreshtoken = localStorage.getItem('refreshtoken');
-    axios
-      .post(
-        'https://pounder-vote.shop/api/token/refresh/',
-        {
-          refresh : refreshtoken,
-        },
-        {
-          headers: {
-            'Content-type': 'application/json',
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-
-        const accesstoken = response.data.access;
-        localStorage.setItem('token', accesstoken);
-        const tokening = localStorage.getItem('token');
-        console.log(tokening)
-
-      })
-      .catch((error) => {
-        console.log(error);
-        window.alert('토큰갱신에러');
-      });
-    }*/
-    
 
   const logoutDB = (e) => { 
     e.preventDefault();
@@ -124,15 +92,16 @@ function VotePage() {
       .then((response) => {
         console.log(response.data);
         window.alert('로그아웃완');
+        localStorage.setItem('username', " ");
       })
       .catch((error) => {
         console.log(error);
 
         if(error.response.data.message ="로그아웃이 불가한 상태입니다.")
         window.alert('로그인을 먼저 해주세요.');
+        localStorage.setItem('username', " ");
       });
   };
-
 
   if (!candidates) return null;
 
@@ -164,5 +133,5 @@ function VotePage() {
       </CenteringWrapper>
     </>
   );
-        }
+}
 export default VotePage;
