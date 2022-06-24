@@ -129,6 +129,7 @@ function VotePage() {
       .then((response) => {
         console.log(response.data);
         window.alert('로그아웃완');
+        localStorage.setItem('username', " ");
       })
       .catch((error) => {
         console.log(error);

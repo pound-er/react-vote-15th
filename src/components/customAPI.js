@@ -1,4 +1,4 @@
-// src/lib/customApi.ts
+//자동토큰갱신을 위해 필요한 파일 수정 필요
 import axios from "axios";
 import { refresh } from "./tokenRefresh";
 
