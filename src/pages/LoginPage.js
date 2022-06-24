@@ -1,17 +1,21 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { UserState } from '../recoil/recoil';
+import { UserState, LoginState } from '../recoil/recoil';
 import { API } from '../API/API';
 import axios from 'axios';
 import { Form, Title, Input, Text, Button } from '../styles/StyleForm';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper } from '../GlobalStyle';
 import { useNavigate } from 'react-router-dom';
+import {useRecoilValue} from 'recoil';
 
 function LoginPage() {
-  const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserState);
   const handleLogin = useSetRecoilState(UserState);
+  const [login, setLogin] = useState(false);
+
+  const navigate = useNavigate();
+
   const onInputChange = useCallback(
     (e) => {
       handleLogin({ ...user, [e.target.name]: e.target.value });
@@ -21,7 +25,6 @@ function LoginPage() {
   const loginDB = (e) => {
     e.preventDefault();
 
-    axios.defaults.headers.post = null;
     axios
       .post(
         'https://pounder-vote.shop/api/login/',
@@ -37,6 +40,7 @@ function LoginPage() {
       )
       .then((response) => {
         console.log(response.data);
+        
         setUser({
           id: response.data.username,
           pw: response.data.password,
@@ -44,11 +48,20 @@ function LoginPage() {
 
         const accesstoken = response.data.token.access;
         localStorage.setItem('token', accesstoken);
-        navigate(`/`);
+        //axios.defaults.headers.common['Authorization'] = accesstoken;
+
+        window.alert("로그인되었씁니다");
+        navigate('/');
+        setLogin(true);
       })
       .catch((error) => {
         console.log(error);
-        window.alert('에러에러');
+
+        if(error.response.data.message ="Wrong password!")
+        window.alert('비밀번호가 잘못 되었습니다.');
+
+        else if(error.response.data.message ="User not found!")
+        window.alert('사용자를 찾을 수 없습니다.');
       });
   };
 

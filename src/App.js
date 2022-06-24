@@ -6,6 +6,7 @@ import { OverallStyle } from './GlobalStyle';
 import VoteResultPage from './pages/VoteResultPage';
 import axios from 'axios';
 import { useEffect } from 'react';
+<<<<<<< HEAD
 import useRecoilState from 'recoil';
 import { UserState } from './recoil/recoil';
 import { useRecoilValue } from 'recoil';
@@ -26,6 +27,33 @@ function App() {
       .then((response) => {
         console.log(response.data);
         console.log('1');
+=======
+import { UserState} from './recoil/recoil';
+import {useRecoilValue ,useRecoilState} from 'recoil';
+
+function App() {
+
+  const user = useRecoilValue(UserState);
+
+  const token = localStorage.getItem('token');
+  
+  useEffect(() => {
+    axios
+      .get(
+        'https://pounder-vote.shop/api/login/user/',
+         { withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${localStorage.getItem('token')}`,
+            
+          },
+        }
+        
+      )
+      .then((response) => {
+        console.log(response.data);
+        
+>>>>>>> c8de21bf0e73309945b85289a86325ef82214c85
       })
       .catch((error) => {
         console.log(error.data, error.message);

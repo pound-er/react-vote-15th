@@ -13,6 +13,9 @@ export const StyledBox = styled.section`
   width: 20%;
   height: 50%;
   font-size: 20px;
-  color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  :hover{
+    transform:scale(1.1);
+  }
 `;

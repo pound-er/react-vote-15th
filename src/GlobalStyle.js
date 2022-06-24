@@ -29,6 +29,7 @@ export const OverallStyle = createGlobalStyle`
   *{  
     box-sizing: border-box;
     font-family: 'Pretendard';
+    color:white;
   }
   html {
     font-size : 16px;
@@ -75,4 +76,5 @@ export const StyledLink = styled(Link)`
   cursor: pointer;
   font-size: 20px;
   color: white;
+  text-decoration-line: none;
 `;

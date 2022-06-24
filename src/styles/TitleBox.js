@@ -12,7 +12,6 @@ export const TitleBox = styled.section`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 10px;
-  color: white;
   width: 25%;
   height: 80%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
