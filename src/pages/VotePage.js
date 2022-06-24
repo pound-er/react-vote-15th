@@ -15,7 +15,7 @@ function VotePage() {
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username');
 
-  console.log("투표페이지에서도아이디받기"+user.id);
+  //console.log("투표페이지에서도아이디받기"+user.id);
 
   useEffect(() => {
     const fetcthCandidates = async () => {
@@ -123,8 +123,7 @@ function VotePage() {
       )
       .then((response) => {
         console.log(response.data);
-        window.alert("로그아웃완");
-
+        window.alert('로그아웃완');
       })
       .catch((error) => {
         console.log(error);
@@ -152,7 +151,7 @@ function VotePage() {
         <StyledButton>
           <StyledLink to={`/VoteResultPage`}>결과화면</StyledLink>
         </StyledButton>
-        <Welcome>{username ? `${username} 님 환영합니다!` : null} </Welcome>
+        <Welcome>{username ? `${username} 님 환영합니다!` : null}</Welcome>
       </Header>
       <CenteringWrapper>
         {candidates.map((candidate) => (
