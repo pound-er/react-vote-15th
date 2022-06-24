@@ -81,6 +81,7 @@ function LoginPage() {
             value={user.id}
             onChange={onInputChange}
             spellCheck="false"
+            autoFocus="true"
           />
           <Text>비밀번호</Text>
           <Input
