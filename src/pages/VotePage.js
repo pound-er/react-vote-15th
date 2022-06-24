@@ -58,20 +58,20 @@ function VotePage() {
 
       .catch((error) => {
         console.log(error);
-        if (error.response.data.message == '투표는 로그인이 필요합니다!') {
+        if (error.response.data.message === '투표는 로그인이 필요합니다!') {
           window.alert('로그인 후 투표해주세요');
         } else if (
-          error.response.data.message ==
+          error.response.data.message ===
           '모든 파트의 투표를 완료하셨기에 재투표가 불가능합니다!'
         ) {
           window.alert('모든 파트의 투표를 완료하셨습니다!');
         } else if (
-          error.response.data.message ==
+          error.response.data.message ===
           '프론트엔드 파트의 투표를 완료하셨기에 재투표가 불가능합니다!'
         ) {
           window.alert('프론트엔드 파트의 투표를 완료하셨습니다!');
         } else if (
-          error.response.data.message ==
+          error.response.data.message ===
           '백엔드 파트의 투표를 완료하셨기에 재투표가 불가능합니다!'
         ) {
           window.alert('백엔드 파트의 투표를 완료하셨습니다!');
