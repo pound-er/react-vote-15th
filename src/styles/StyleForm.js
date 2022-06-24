@@ -17,6 +17,7 @@ export const Input = styled.input`
   height: 50px;
   width: 300px;
   margin: 10px;
+  
 `;
 export const Text = styled.div`
   font-size: 15px;
