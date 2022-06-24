@@ -14,7 +14,7 @@ function SignUpPage() {
     axios.defaults.headers.post = null;
     axios
       .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/signup/',
+        'https://pounder-vote.shop/api/signup/',
         {
           password: inputText.pw,
           username: inputText.id,
@@ -75,9 +75,14 @@ function SignUpPage() {
             spellCheck="false"
           />
           <StyledButton>회원가입</StyledButton>
-          <div style={{color: 'black'}}>
+          <div style={{ color: 'black' }}>
             이미 회원이신가요?
-            <Link to={`/LoginPage`} style ={{'text-decoration-line': 'none', color : 'purple'}}>로그인</Link>
+            <Link
+              to={`/LoginPage`}
+              style={{ 'text-decoration-line': 'none', color: 'purple' }}
+            >
+              로그인
+            </Link>
           </div>
         </Form>
       </CenteringWrapper>
