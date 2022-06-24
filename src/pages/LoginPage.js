@@ -47,7 +47,10 @@ function LoginPage() {
         });
 
         const accesstoken = response.data.token.access;
+        const refreshtoken = response.data.token.refresh;
+        
         localStorage.setItem('token', accesstoken);
+        localStorage.setItem('refreshtoken', refreshtoken);
         //axios.defaults.headers.common['Authorization'] = accesstoken;
 
         window.alert("로그인되었씁니다");

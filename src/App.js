@@ -30,11 +30,13 @@ function App() {
       )
       .then((response) => {
         console.log(response.data);
+        localStorage.setItem('username', response.data.username);
         
       })
       .catch((error) => {
         console.log(error.data, error.message);
         console.log(error);
+        localStorage.setItem('username', false);
       });
   }, [user]);
 
