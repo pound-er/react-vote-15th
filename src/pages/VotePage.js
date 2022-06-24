@@ -12,6 +12,7 @@ import {useRecoilValue} from 'recoil';
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
   const user = useRecoilValue(UserState);
+  const token = localStorage.getItem('token');
   
   console.log("투표페이지에서도아이디받기"+user.id);
 
@@ -20,7 +21,7 @@ function VotePage() {
       try {
         setCandidates(null);
         const response = await axios.get(
-          'https://pounder-vote.shop/api/vote/'
+          'https://pounder-vote.shop/api/candidate/'
         );
         setCandidates(response.data);
       } catch (e) {
@@ -35,10 +36,17 @@ function VotePage() {
     axios
       .post(
         'https://pounder-vote.shop/api/vote/',
-        { candidate: candidates[index].candidate_name }
+        { candidate: candidates[index].candidate_name },
+        {
+          headers:{
+            Authorization: `${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+
+          }
+        }
       )
       .then((response) => {
-        console.log('투표 되었습니다!');
+        window.alert('투표 되었습니다!');
         console.log(response);
         
         setCandidates((candidates) =>

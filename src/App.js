@@ -14,18 +14,16 @@ function App() {
   const user = useRecoilValue(UserState);
 
   const token = localStorage.getItem('token');
-  console.log(token);
   
   useEffect(() => {
     axios
-      .post(
-        'https://pounder-vote.shop/api/verify/',
-          {
-            token: token, 
-          },
-         { headers: {
+      .get(
+        'https://pounder-vote.shop/api/login/user/',
+         { withCredentials: true,
+          headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `${localStorage.getItem('token')}`,
+            
           },
         }
         

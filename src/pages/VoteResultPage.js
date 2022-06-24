@@ -18,7 +18,7 @@ function VoteResultPage() {
       try {
         setResult(null);
         const response = await axios.get(
-          'https://pounder-vote.shop/api/vote/'
+          'https://pounder-vote.shop/api/candidate/'
         );
         setResult(response.data);
         setLeader(response.data[0].candidate_name);
