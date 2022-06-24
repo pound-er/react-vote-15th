@@ -20,10 +20,8 @@ export const Input = styled.input`
 `;
 export const Text = styled.div`
   font-size: 15px;
-  color: white;
 `;
 export const Title = styled.div`
   margin: 10px;
   font-size: 30px;
-  color: white;
 `;

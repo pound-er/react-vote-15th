@@ -2,19 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { StyledBox } from '../styles/StyledBox';
-import { InnerBox } from '../styles/InnerBox';
+import { InnerBox, Welcome } from '../styles/InnerBox';
 import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
+import { UserState } from '../recoil/recoil';
+import {useRecoilValue} from 'recoil';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
+  const user = useRecoilValue(UserState);
+  const token = localStorage.getItem('token');
+  
+  console.log("투표페이지에서도아이디받기"+user.id);
+
   useEffect(() => {
     const fetcthCandidates = async () => {
       try {
         setCandidates(null);
         const response = await axios.get(
-          'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/'
+          'https://pounder-vote.shop/api/candidate/'
         );
         setCandidates(response.data);
       } catch (e) {
@@ -28,12 +35,20 @@ function VotePage() {
     console.log(candidates[index].candidate_name);
     axios
       .post(
-        'http://ec2-3-38-228-115.ap-northeast-2.compute.amazonaws.com/api/vote/',
-        { candidate: candidates[index].candidate_name }
+        'https://pounder-vote.shop/api/vote/',
+        { candidate: candidates[index].candidate_name },
+        {
+          headers:{
+            Authorization: `${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+
+          }
+        }
       )
       .then((response) => {
-        console.log('1');
+        window.alert('투표 되었습니다!');
         console.log(response);
+        
         setCandidates((candidates) =>
           candidates.map((item) => {
             if (item.id === index) {
@@ -43,12 +58,15 @@ function VotePage() {
           })
         );
       })
+      
       .catch((error) => {
         console.log(error);
         window.alert('로그인 후 투표해주세요');
       });
   };
+  
   if (!candidates) return null;
+
   return (
     <>
       <Header>
@@ -61,13 +79,14 @@ function VotePage() {
         <StyledButton>
           <StyledLink to={`/VoteResultPage`}>결과화면</StyledLink>
         </StyledButton>
+        <Welcome>{user.id ? `${user.id} 님 환영합니다!` : null} </Welcome>
       </Header>
       <CenteringWrapper>
-        {candidates.map((user) => (
-          <StyledBox key={user.id} onClick={() => handleVote(user.id - 1)}>
-            <TitleBox>{user.part}</TitleBox>
-            <CenteringWrapper>{user.candidate_name}</CenteringWrapper>
-            <InnerBox>{user.description}</InnerBox>
+        {candidates.map((candidate) => (
+          <StyledBox key={candidate.id} onClick={() => handleVote(candidate.id - 1)}>
+            <TitleBox>{candidate.part}</TitleBox>
+            <CenteringWrapper>{candidate.candidate_name}</CenteringWrapper>
+            <InnerBox>{candidate.description}</InnerBox>
           </StyledBox>
         ))}
       </CenteringWrapper>
