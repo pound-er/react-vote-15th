@@ -29,12 +29,12 @@ function VotePage() {
     fetcthCandidates();
   }, []);
 
-  const handleVote = (index) => {
-    console.log(candidates[index].candidate_name);
+  const handleVote = (chosenCandidate) => {
+    console.log(chosenCandidate.candidate_name);
     axios
       .post(
         'https://pounder-vote.shop/api/vote/',
-        { candidate: candidates[index].candidate_name },
+        { candidate: chosenCandidate.candidate_name },
         {
           headers: {
             Authorization: `${localStorage.getItem('token')}`,
@@ -48,7 +48,7 @@ function VotePage() {
 
         setCandidates((candidates) =>
           candidates.map((item) => {
-            if (item.id === index) {
+            if (item.candidate_name === chosenCandidate) {
               return { ...item, vote_ctn: item.vote_ctn + 1 };
             }
             return item;
@@ -129,7 +129,7 @@ function VotePage() {
       .then((response) => {
         console.log(response.data);
         window.alert('로그아웃완');
-        localStorage.setItem('username', " ");
+        localStorage.setItem('username', ' ');
       })
       .catch((error) => {
         console.log(error);
@@ -158,10 +158,7 @@ function VotePage() {
       </Header>
       <CenteringWrapper>
         {candidates.map((candidate) => (
-          <StyledBox
-            key={candidate.id}
-            onClick={() => handleVote(candidate.id - 1)}
-          >
+          <StyledBox key={candidate.id} onClick={() => handleVote(candidate)}>
             <TitleBox>{candidate.part}</TitleBox>
             <CenteringWrapper>{candidate.candidate_name}</CenteringWrapper>
             <InnerBox>{candidate.description}</InnerBox>
