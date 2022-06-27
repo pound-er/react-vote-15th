@@ -27,7 +27,6 @@ function SignUpPage() {
         }
       )
       .then((response) => {
-        console.log(response.data);
         navigate('/LoginPage');
       })
       .catch((error) => {

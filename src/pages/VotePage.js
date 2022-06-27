@@ -6,12 +6,11 @@ import { TitleBox } from '../styles/TitleBox';
 import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
 import { UserState } from '../recoil/recoil';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
-  const user = useRecoilValue(UserState);
-  const token = localStorage.getItem('token');
+  const [user, setUser] = useRecoilState(UserState);
   const username = localStorage.getItem('username');
 
   useEffect(() => {
@@ -23,7 +22,7 @@ function VotePage() {
         );
         setCandidates(response.data);
       } catch (e) {
-        console.log(1);
+        console.log(e);
       }
     };
     fetcthCandidates();
@@ -113,7 +112,6 @@ function VotePage() {
     //refreshToken();
 
     const refreshtoken = localStorage.getItem('refreshtoken');
-    console.log(token);
     axios
       .post(
         'https://pounder-vote.shop/api/logout/',
@@ -128,12 +126,13 @@ function VotePage() {
       )
       .then((response) => {
         console.log(response.data);
-        window.alert('로그아웃완');
-        localStorage.setItem('username', ' ');
+        window.alert('로그아웃완료');
+        localStorage.clear();
+        setUser(null);
+        console.log(user);
       })
       .catch((error) => {
         console.log(error);
-
         if ((error.response.data.message = '로그아웃이 불가한 상태입니다.'))
           window.alert('로그인을 먼저 해주세요.');
       });
@@ -154,7 +153,9 @@ function VotePage() {
         <StyledButton>
           <StyledLink to={`/VoteResultPage`}>결과화면</StyledLink>
         </StyledButton>
-        <Welcome>{username ? `${username} 님 환영합니다!` : null}</Welcome>
+        <Welcome>
+          {user === null || user === '' ? null : `${username} 님 환영합니다!`}
+        </Welcome>
       </Header>
       <CenteringWrapper>
         {candidates.map((candidate) => (
