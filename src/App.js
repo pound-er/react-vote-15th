@@ -11,7 +11,6 @@ import { useRecoilValue } from 'recoil';
 
 function App() {
   const user = useRecoilValue(UserState);
-
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -24,13 +23,10 @@ function App() {
         },
       })
       .then((response) => {
-        console.log(response.data);
         localStorage.setItem('username', response.data.username);
-        console.log(token);
       })
       .catch((error) => {
         console.log(error.data, error.message);
-        console.log(error);
         localStorage.setItem('username', ' ');
       });
   }, [user]);
