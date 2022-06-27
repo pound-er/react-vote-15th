@@ -126,9 +126,10 @@ function VotePage() {
       )
       .then((response) => {
         console.log(response.data);
-        window.alert('로그아웃완료');
+
         localStorage.clear();
         setUser(null);
+        window.alert('로그아웃완료');
         console.log(user);
       })
       .catch((error) => {
@@ -139,6 +140,8 @@ function VotePage() {
   };
 
   if (!candidates) return null;
+  console.log('finally');
+  console.log(user);
 
   return (
     <>
@@ -154,7 +157,9 @@ function VotePage() {
           <StyledLink to={`/VoteResultPage`}>결과화면</StyledLink>
         </StyledButton>
         <Welcome>
-          {user === null || user === '' ? null : `${username} 님 환영합니다!`}
+          {user === null || user.id === ''
+            ? null
+            : `${username} 님 환영합니다!`}
         </Welcome>
       </Header>
       <CenteringWrapper>
