@@ -4,6 +4,7 @@ import { CenteringWrapper } from '../GlobalStyle';
 import { StyledBox } from '../styles/StyledBox';
 import styled from 'styled-components';
 import { StyledButton } from '../styles/StyledButton';
+import API from '../components/customAPI';
 
 function VoteResultPage() {
   const [result, setResult] = useState(null);
@@ -17,9 +18,7 @@ function VoteResultPage() {
     const fetcthResult = async () => {
       try {
         setResult(null);
-        const response = await axios.get(
-          'https://pounder-vote.shop/api/candidate/'
-        );
+        const response = await API.get('/candidate/');
         setResult(response.data);
         setLeader(response.data[0].candidate_name);
       } catch (e) {

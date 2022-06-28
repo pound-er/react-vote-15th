@@ -7,6 +7,7 @@ import { StyledButton } from '../styles/StyledButton';
 import { CenteringWrapper, Header, StyledLink } from '../GlobalStyle';
 import { UserState } from '../recoil/recoil';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import Api from '../components/customAPI';
 
 function VotePage() {
   const [candidates, setCandidates] = useState(null);
@@ -17,9 +18,7 @@ function VotePage() {
     const fetcthCandidates = async () => {
       try {
         setCandidates(null);
-        const response = await axios.get(
-          'https://pounder-vote.shop/api/candidate/'
-        );
+        const response = await Api.get('/candidate/');
         setCandidates(response.data);
       } catch (e) {
         console.log(e);

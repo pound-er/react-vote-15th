@@ -53,7 +53,7 @@ function LoginPage() {
 
         localStorage.setItem('username', user.id);
 
-        window.alert('로그인되었씁니다');
+        window.alert('로그인되었습니다');
         navigate('/');
         setLogin(true);
       })
